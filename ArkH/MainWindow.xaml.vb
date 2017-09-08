@@ -1,10 +1,13 @@
 ﻿Imports System.ComponentModel
 Imports System.IO
-Imports System.Runtime.InteropServices
+Imports Microsoft.Win32
 
 Class MainWindow
-    Dim overlaywin As New Overlay()
-    Dim notifywin As New Notification()
+    ' Dim notifywin As New Notification()
+    Dim clearol As New ClearOverlay()
+
+
+
     Declare Function GetAsyncKeyState Lib "user32.dll" (ByVal nVirtKey As keys) As Short
     Private WithEvents Bgworker As New ComponentModel.BackgroundWorker
 
@@ -318,20 +321,26 @@ Class MainWindow
 
 
         If globvar_enableoverlay = True Then
-            notifywin.Show()
+            'notifywin.Show()
+            'test 
+            clearol.Show()
 
-            overlaywin.Show()
-            notifywin.screenmessage()
 
-            overlaywin.OL_Update()
+            'clearol.Show()
+            'notifywin.screenmessage()
+
+            clearol.refreshOL()
+
             chkEnableOverlay.IsChecked = True
         Else
             chkEnableOverlay.IsChecked = False
-            overlaywin.Hide()
-            notifywin.Hide()
+            'clearol.Hide()
+            'notifywin.Hide()
+            clearol.Hide()
         End If
-        overlaywin.OL_Update()
-        notifywin.screenmessage()
+        clearol.refreshOL()
+
+        'notifywin.screenmessage()
         'binds
         txtKeyForward.Text = bind_forward
         txtKeyUse.Text = bind_use
@@ -393,6 +402,7 @@ Class MainWindow
         If globvar_matehelperstate = True Then
             AppActivate(globvar_gamewindowname)
             keycodepress(ConvertCharToVirtualKey(txtKeyWhistle.Text))
+            keycoderelease(ConvertCharToVirtualKey(txtKeyWhistle.Text))
         End If
 
 
@@ -410,6 +420,7 @@ Class MainWindow
         If GetAsyncKeyState(keys.VK_LMENU) <> 0 Then
             togglemainwin()
         End If
+        clearol.refreshOL()
     End Sub
     Private Sub action_tickm()
         Bgworker.RunWorkerAsync()
@@ -423,12 +434,12 @@ Class MainWindow
     Public Sub toggleautowalk()
         If globvar_autowalkstate = False Then
             globvar_autowalkstate = True
-            'overlaywin.toggleautowalkbutton(True)
-            overlaywin.OL_Update()
+            'clearol.toggleautowalkbutton(True)
+            clearol.refreshOL()
         Else
             globvar_autowalkstate = False
-            overlaywin.OL_Update()
-            'overlaywin.toggleautowalkbutton(False)
+            clearol.refreshOL()
+            'clearol.toggleautowalkbutton(False)
             'keyrelease(keys.VK_W)
             keycoderelease(ConvertCharToVirtualKey(txtKeyForward.Text))
         End If
@@ -437,10 +448,10 @@ Class MainWindow
     Public Sub togglematehelper()
         If globvar_matehelperstate = False Then
             globvar_matehelperstate = True
-            overlaywin.OL_Update()
+            clearol.refreshOL()
         Else
             globvar_matehelperstate = False
-            overlaywin.OL_Update()
+            clearol.refreshOL()
             keycoderelease(ConvertCharToVirtualKey(txtKeyWhistle.Text))
         End If
         updateglobalstate()
@@ -630,8 +641,8 @@ Class MainWindow
 
     Private Sub MainWindow_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         writeoptions()
-        overlaywin.Close()
-        notifywin.Close()
+        clearol.Close()
+        'notifywin.Close()
     End Sub
 
     Private Sub btnSetDefault_Click(sender As Object, e As RoutedEventArgs) Handles btnSetDefault.Click
@@ -645,12 +656,12 @@ Class MainWindow
 
     Private Sub chkEnableOverlay_Checked(sender As Object, e As RoutedEventArgs) Handles chkEnableOverlay.Checked
         globvar_enableoverlay = True
-        overlaywin.Show()
+        clearol.Show()
     End Sub
 
     Private Sub chkEnableOverlay_Unchecked(sender As Object, e As RoutedEventArgs) Handles chkEnableOverlay.Unchecked
         globvar_enableoverlay = False
-        overlaywin.Hide()
+        clearol.Hide()
     End Sub
 
     Private Function getkeycode(ByVal s As String) As keys
@@ -862,5 +873,12 @@ Class MainWindow
 
     Private Sub btnExit_Click(sender As Object, e As RoutedEventArgs) Handles btnExit.Click
         Me.Close()
+    End Sub
+
+    Private Sub btnBrowsePathToGame_Click(sender As Object, e As RoutedEventArgs) Handles btnBrowsePathToGame.Click
+        Dim openfiledialog As New OpenFileDialog()
+        If openfiledialog.ShowDialog() = True Then
+            txtPathToGame.Text = Path.GetFullPath(openfiledialog.FileName)
+        End If
     End Sub
 End Class

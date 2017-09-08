@@ -33,18 +33,52 @@ Module getWebAPIinfo
 
     Private Sub findEvents()
         Dim Substrings() As String = globvar_APInews.Split(vbCrLf)
-        globvar_eventmessage = ""
+        globvar_eventmessage = "Event NOT active"
         globvar_eventactive = False
         For Each substring In Substrings
             'MsgBox(substring)
-            If substring.Contains("Phoenix") = True Then
+            If substring.Contains("EVOLUTION") = True Then
+
+
+                If substring.Contains("1.5X") = True Then
+                    globvar_eventmessage = "Event: 1.5x until" & vbCrLf & analyzenews(substring)
+                ElseIf substring.Contains("2X") = True Then
+                    globvar_eventmessage = "Event: 2x until" & vbCrLf & analyzenews(substring)
+
+                    'MsgBox("Found")
+                    'MsgBox(analyzenews(substring))
+
+                ElseIf substring.Contains("3X") = True Then
+                    globvar_eventmessage = "Event: 3x until" & vbCrLf & analyzenews(substring)
+
+
+
+                End If
+
                 globvar_eventactive = True
-                globvar_eventmessage = substring
+                'globvar_eventmessage = substring
                 ' MsgBox(substring)
             Else
             End If
         Next
+
         ' MsgBox(globvar_eventmessage)
     End Sub
 
+
+    Private Function analyzenews(ByVal news As String)
+        Dim retnews As String
+        Dim p1 As Integer
+        Dim p2 As Integer
+
+        p1 = InStr(1, news, "through")
+        ' MsgBox(p1 & vbCrLf & p2)
+
+        retnews = Mid(news, p1 + 8)
+        p2 = InStr(1, retnews, ", with")
+
+        retnews = Left(retnews, p2 - 1)
+        Return retnews
+
+    End Function
 End Module

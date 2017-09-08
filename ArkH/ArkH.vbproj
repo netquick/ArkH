@@ -82,6 +82,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClearOverlay.xaml.vb">
+      <DependentUpon>ClearOverlay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="functions.vb" />
     <Compile Include="GetWebAPIinfo.vb" />
     <Compile Include="HandleProceses.vb" />
@@ -92,6 +95,10 @@
       <DependentUpon>Overlay.xaml</DependentUpon>
     </Compile>
     <Compile Include="PressKeys.vb" />
+    <Page Include="ClearOverlay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

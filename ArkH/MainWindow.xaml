@@ -64,13 +64,17 @@
         <Grid Margin="10,10,10,45" Grid.Row="2">
             <Rectangle Fill="#00F4F4F4" Stroke="Black"/>
             <Slider HorizontalAlignment="Left" Margin="10,43,0,0" VerticalAlignment="Top" Width="289"/>
-            <Label x:Name="lblKeyForward_Copy3" Content="AutoFeed Rate (seconds)" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="227"/>
+            <Label x:Name="lblKeyForward_Copy3" Content="AutoFeed Rate (seconds)" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="170"/>
             <Slider HorizontalAlignment="Left" Margin="10,97,0,0" VerticalAlignment="Top" Width="289"/>
             <Label x:Name="lblKeyForward_Copy4" Content="AutoEat Rate (minutes)" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" Width="227"/>
             <Slider HorizontalAlignment="Left" Margin="10,151,0,0" VerticalAlignment="Top" Width="289"/>
             <Label x:Name="lblKeyForward_Copy5" Content="AutoDrink Rate (minutes)" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top" Width="227"/>
             <Slider HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top" Width="289"/>
             <Label x:Name="lblKeyForward_Copy6" Content="AutoScreenshot Interval (minutes)" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top" Width="227"/>
+            <Label x:Name="lblAutoFeedRateValue" Content="60" HorizontalAlignment="Left" Margin="255,10,0,0" VerticalAlignment="Top" Width="44" HorizontalContentAlignment="Right"/>
+            <Label x:Name="lblAutoEatRateValue" Content="60" HorizontalAlignment="Left" Margin="255,64,0,0" VerticalAlignment="Top" Width="44" HorizontalContentAlignment="Right"/>
+            <Label x:Name="lblAutoDrinkRateValue" Content="60" HorizontalAlignment="Left" Margin="255,118,0,0" VerticalAlignment="Top" Width="44" HorizontalContentAlignment="Right"/>
+            <Label x:Name="lblAutoScreenshotRateValue" Content="60" HorizontalAlignment="Left" Margin="255,172,0,0" VerticalAlignment="Top" Width="44" HorizontalContentAlignment="Right"/>
         </Grid>
 
 
